@@ -60,4 +60,4 @@ plot(dd$times, dd$c, type='b')
 points(dd_dis$times, dd_dis$c, col=2)
 
 ##Output data as a csv file
-write.table(dd_dis, file="sim.csv", sep=",",row.names=FALSE, col.names=FALSE)
+write.csv(dd_dis, file="data/immigration_death.csv", row.names=FALSE)
