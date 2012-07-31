@@ -1,0 +1,38 @@
+\begin{sidewaystable*}
+
+\begin{center}
+\caption{Rat data. Summary of the results of one- as well as
+two-sided, likelihood ratio as well as score tests for the comparison
+of a series of linear mixed models fitted to the rat data. The
+estimate $\widehat{D}$ denotes the unconstrained maximum likelihood
+estimate for the matrix $D$ in the linear mixed model. Every entry
+consists of (1) the test statistic; (2) the null distribution; (3) the
+$p$-value.\label{tableone}}
+%\vspace*{0.5cm}
+\begin{tabular}{llccccc}
+\Hline
+&      &     & \multicolumn{2}{c}{\bfseries \normalsize LR test} & \multicolumn{2}{c}{\bfseries \normalsize Score test} \\
+\cline{4-7}
+& & Ref. &   One-sided & Two-sided &   One-sided & Two-sided  \\
+\cline{4-7}
+\hline
+1: &$D=0$   &  & & & &     \\
+\hline
+2: & $D=\left( \begin{array}{c}d_{11}\end{array} \right)$    & 1 & $1102.7-928.7=174$  & $1102.7-928.7=174$ &  $27.15-0.0=27.15$  & $27.15$  \\
+&  & & $\frac{1}{2} \chi^2_0 + \frac{1}{2} \chi^2_1$  & $\chi^2_1$  & $\frac{1}{2} \chi^2_0 + \frac{1}{2} \chi^2_1$  & $\chi^2_1$   \\
+& $\widehat{D}=\left( \begin{array}{c}3.44\end{array} \right)$    &  &  $p<0.0001$  &  $p<0.0001$ & $p<0.0001$  &  $p<0.0001$  \\
+\hline
+3: & $D=\left( \begin{array}{cc}d_{11}  & 0 \\ 0 & d_{22} \end{array} \right)$   & 2 & $928.7-928.7=0.0$  &  $928.7-927.4 = 1.3$ &   $1.67-1.67=0$  & $1.67$  \\
+&  & &  $\frac{1}{2} \chi^2_0 + \frac{1}{2} \chi^2_1$   & $\chi^2_1$  & $\frac{1}{2} \chi^2_0 + \frac{1}{2} \chi^2_1$   & $\chi^2_1$   \\
+ & $\widehat{D}=\left( \begin{array}{cc} 3.77  & 0 \\ 0 & -0.17 \end{array} \right)$ &  &
+$p=1.0000$ & $p=0.2542$ & $p=1.0000$ &  $p=0.1963$  \\
+\hline
+4: &  $D=\left( \begin{array}{cc}d_{11}  & d_{12} \\ d_{12} & d_{22} \end{array} \right)$  & 2 & $928.7-928.6=0.1$  & $928.7-925.8=2.9$   & $2.03 - 1.93=0.1$     & $2.03$ \\
+&  & & $\frac{1}{2} \chi^2_1 + \frac{1}{2} \chi^2_2$  &  $\chi^2_2$   & $\frac{1}{2} \chi^2_1 + \frac{1}{2} \chi^2_2$  &  $\chi^2_2$   \\
+ &$\widehat{D}=\left( \begin{array}{cc} 2.83  & 0.48 \\ 0.48 & -0.33 \end{array} \right)$  &  &  $p=0.8515$  & $p=0.2346$ &  $p=0.8515$ & $p=0.3624$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{sidewaystable*}
+\efloatseparator
+ 

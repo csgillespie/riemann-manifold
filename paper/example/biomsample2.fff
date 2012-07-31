@@ -1,0 +1,22 @@
+\begin{figure*}
+
+\begin{center}
+\centerline{\includegraphics[angle=270,width=8.5cm]{tteken185.eps}}
+\end{center}
+\caption{Graphical representation of two different situations, when
+developing one-sided tests for the variance $\tau^2$ of the random
+intercepts $b_i$ in model (\protect\ref{rimodel}).
+\label{figureone}}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}
+
+\begin{center}
+\centerline{\includegraphics[width=3.75in,angle=270]{tteken21.eps}}
+\end{center}
+\caption{Rat Data. Individual profiles for each of the treatment
+groups in the rat experiment separately. \label{figuretwo}}
+\end{figure*}
+\efloatseparator
+ 
