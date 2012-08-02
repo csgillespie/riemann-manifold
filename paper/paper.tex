@@ -79,13 +79,6 @@ Inference for MJP is difficult: non-linear likelihood, computational
 \item Including observational error
 \item Time course measurements, unlike Mark's LNA
 \end{itemize}
-\item Examples:
-\begin{itemize}
-\item Immigration-death model: exact proposal compared with approximate proposal
-  (no noise)
-\item Aphid model: 3 blocks * 3 water treats * 3 nitro treats with Poisson error
-\item Hidden states (counts), updated using standard method
-\end{itemize}
 \end{itemize}
 \end{itemize}
 \end{abstract}
@@ -145,12 +138,18 @@ non-linear likelihood, computational expensive, proposals expensive, analyticall
 
 \subsection{Stochastic Population Models}
 
+C \& B
+
 \subsection{Moment Closure Scheme}
 
+CSG
+
 \subsection{Approximate Riemannian Geometry}
+BC
 
 \subsection{Delay Acceptance Scheme}
 
+?
 Key point: little overhead for approximate likelihood
 
 
@@ -159,18 +158,25 @@ Key point: little overhead for approximate likelihood
 \subsection{Immigration-death}
 
 \begin{itemize}
-\item Comparison between approximate proposal and true proposal
-\item Comparison between LNA and MC?
-\item Three examples: increase correlation
+\item Comparison between Riemannian MC proposal, LNA proposal and true proposal
+\item Comparison between Riemannian and MH
+\item A single example, with highly correlated parameters
 \end{itemize}
 
-\subsection{Independent time course}
+\subsection{SIR (type) model}
 
-Bimodal example??
+\begin{itemize}
+\item Use model from Stumpf ABC paper (with real data?)
+\end{itemize}
 
-\subsection{Aphid simulation study}
+\subsection{Aphid data set}
 
-\section{Aphid real}
+\begin{itemize}
+\item 36 parameters - 18 birth, 18 death. 3 water treatments, 3 nitrogen treatments and 3 blocks, with interactions
+\item 5*27 (I think) latent data sets
+\item Exploit Sub-mannifolds for choosing parameter sets
+\item Poisson error structure
+\end{itemize}
 
 
 \section{Discussion}
