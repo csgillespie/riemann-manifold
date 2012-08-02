@@ -23,8 +23,9 @@
 
 \setcounter{footnote}{2}
 
-\title[This is an Example of Recto Running Head]{This is an Example of
-an Article Title This is an Example of an Article Title}
+\title[Fast approximate proposals for exact inference in stochastic kinetic
+models]{Fast approximate proposals for exact inference in stochastic kinetic
+  models}
 
 \author{B. Calderhead$^{*}$\email{email@address.com} \\
 	   Institute of Physics, CA 560034, USA
@@ -52,17 +53,41 @@ an Article Title This is an Example of an Article Title}
 %  pub the summary here
 
 \begin{abstract}
-The world will little note, nor long remember, what we say here, but
-can never forget what they did here. It is for us, the living, rather
-to be dedicated here to the unfinished work which they have, thus far,
-so nobly carried out. It is rather for us to be here dedicated to the
-great task remaining before us--that from these honored dead we take
-increased devotion to that cause for which they here gave the last
-full measures of devotion--that we here highly resolve that these dead
-shall not have died in vain; that this nation shall have a new birth
-of freedom; and that this government of the people, by the people, for
-the people, shall not perish from the earth. The world will little
-note.
+\begin{itemize}
+\item Inference for MJP is difficult: non-linear likelihood, computational
+  expensive, proposals expensive, analytically intractable likelihood
+\item Data: Partially observed discrete, noisy time-course.
+\item Existing work for likelihood evaluations: 
+\begin{itemize}
+\item Likelihood calculations
+\begin{itemize}
+\item Exact: Boys et al, slow, not noise
+\item Approx SDE - Andy and Darren (with Noise)
+\item Approx MC - Andy and Colin (no noise)
+\item Approx LNA - Mark (no noise), Kolmo' (no noise, but check)
+\end{itemize}
+\item New:
+\begin{itemize}
+\item Approximate proposal mechanism based on the geometry of MC
+\begin{itemize}
+\item Overcome strong correlation structure which is standard with partially
+  observed data
+\item Fast proposals based on approximate geometry
+\item Accept/reject with approximate model before trying exact model
+\end{itemize}
+\item Inference is exact
+\item Including observational error
+\item Time course measurements, unlike Mark's LNA
+\end{itemize}
+\item Examples:
+\begin{itemize}
+\item Immigration-death model: exact proposal compared with approximate proposal
+  (no noise)
+\item Aphid model: 3 blocks * 3 water treats * 3 nitro treats with Poisson error
+\item Hidden states (counts), updated using standard method
+\end{itemize}
+\end{itemize}
+\end{itemize}
 \end{abstract}
 
 %
@@ -80,27 +105,70 @@ Stochastic; Moment-closure.
 \section{Introduction}
 \label{s:intro}
 
+\begin{itemize}
+\item Inference for MJP is difficult: non-linear likelihood, computational
+  expensive, proposals expensive, analytically intractable likelihood
+\item Data: Partially observed discrete, noisy time-course.
+\item Existing work for likelihood evaluations: 
+\begin{itemize}
+\item Likelihood calculations
+\begin{itemize}
+\item Exact: Boys et al, slow, not noise
+\item Approx SDE - Andy and Darren (with Noise)
+\item Approx MC - Andy and Colin (no noise)
+\item Approx LNA - Mark (no noise), Kolmo' (no noise, but check)
+\end{itemize}
+\end{itemize}
+\item Novel stuff
+\end{itemize}
+Different from Mark's LNA paper:
+\begin{itemize}
+\item Analysis of impact of the approximate proposal scheme
+\item Using Noise
+\item Using delayed acceptance scheme so exact inference
+\item Time course data
+\item Using real data
+\end{itemize}
 
 
-\section[]{Material Description of the Envelope\break Predominantly Model}
+\section{Methods}
+
+\subsection{Stochastic kinetic models}
+
+\subsection{Moment closure scheme}
+
+\subsection{Approximate Riemannian Geometry}
+
+\subsection{Delay acceptance scheme}
+
+Key point: little overhead for approximate likelihood
 
 
-\subsection{Radial Distribution of Dust}
+\section{Example}
 
+\subsection{Immigration-death}
 
-\subsection{An Example of Head two}
-\subsubsection{An example of head three comparison with oxygen and~carbon~Miras}
+\begin{itemize}
+\item Comparison between approximate proposal and true proposal
+\item Comparison between LNA and MC?
+\item Three examples: increase correlation
+\end{itemize}
 
+\subsection{Independent time course}
 
-% \begin{figure*}
-% %  \centerline{\includegraphics[width=4.5in]{mouse.eps}}
-%   \caption{An example of figure caption. An example of 
-%   figure caption. An example of figure caption. An example of
-%    figure caption. An example of figure caption.}
-% \label{f:bigmouse}
-% \end{figure*}
+Bimodal example??
+
+\subsection{Aphid simulation study}
+
+\section{Aphid real}
+
 
 \section{Discussion}
+
+\begin{itemize}
+\item Use of geometry vital in tackling real problems
+\item Could also use other approximation schemes such as the LNA??
+\end{itemize}
 
 \backmatter
 
