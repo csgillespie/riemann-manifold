@@ -48,7 +48,7 @@ gillespie = function(IC, pars, maxtime=10) {
 }
 
 set.seed(1)
-dd = gillespie(c(0, 0), c(1, 0.1), 50)
+dd = gillespie(c(0, 0), c(1, 1), 50)
 dd_dis = discretise(dd, 5)
 
 ##Plot the data

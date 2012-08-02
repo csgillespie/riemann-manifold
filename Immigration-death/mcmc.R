@@ -22,35 +22,11 @@ log_likelihood = function(k1, k2, t, x) {
     return(ll)
 }
 
-dd = read.csv("data/immigration_death.csv")
-log_likelihood(k1, k2, dd[,1], dd[,2])
+dd = read.csv("data/immigration_death1.csv")
+log_likelihood(1, 0.1, dd[,1], dd[,2])
 
-k1 = seq(0,3, 0.005)
-k2 = seq(0,0.4, 0.005)
+k1 = seq(log(0.001),log(10),  length.out=100)
+k2 = seq(log(0.001),log(10), length.out=100)
 d = outer(k1, k2, function(k1, k2) log_likelihood(k1, k2, dd[,1], dd[,2]))
-
-image(k1, k2, exp(d))
-# 
-# prop_theta = function(theta_cur){
-#     theta_cur
-# }
-# 
-# 
-# 
-# 
-# 
-# theta_cur = c(0.1, 0.1)
-# ll_cur = -Inf
-# for(i in 1:iters) {
-#     theta_prop  = prop_theta(theta_cur)
-#     ll_prop = log_likelihood(theta_prop)
-#     
-#     
-#     
-#     
-#     
-#     
-#     
-# }
-# 
-# 
+image(log(k1), log(k2), exp(d))
+points(1, 1,pch=18)
