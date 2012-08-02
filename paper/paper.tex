@@ -23,12 +23,10 @@
 
 \setcounter{footnote}{2}
 
-\title[Fast approximate proposals for exact inference in stochastic kinetic
-models]{Fast approximate proposals for exact inference in stochastic kinetic
-  models}
+\title[Efficient inference using the approximate Riemannian geometry of stochastic population models]{Efficient inference using the approximate Riemannian geometry of stochastic population models}
 
-\author{B. Calderhead$^{*}$\email{email@address.com} \\
-	   Institute of Physics, CA 560034, USA
+\author{B. Calderhead$^{*}$\email{b.calderhead@ucl.ac.uk} \\
+	   Centre for Mathematics and Physics in the Life Sciences and Experimental Biology,\\University College London, UK
 	   \and 
 	   C. S. Gillespie$^{*}$\email{colin.gillespie@newcastle.ac.uk}\\
 	   School of Mathematics \& Statistics, Newcastle University,
@@ -54,7 +52,9 @@ models]{Fast approximate proposals for exact inference in stochastic kinetic
 
 \begin{abstract}
 \begin{itemize}
-\item Inference for MJP is difficult: non-linear likelihood, computational
+\item We present efficient and novel methodology for Bayesian inference over stochastic kinetic models with complex dynamics and large numbers of parameters.
+
+Inference for MJP is difficult: non-linear likelihood, computational
   expensive, proposals expensive, analytically intractable likelihood
 \item Data: Partially observed discrete, noisy time-course.
 \item Existing work for likelihood evaluations: 
@@ -130,16 +130,26 @@ Different from Mark's LNA paper:
 \item Using real data
 \end{itemize}
 
+Importance of stochastic population models for further scientific understanding of natural systems vs deterministic models.  For example in ecology, where we often have to deal with discrete noisy data.  Importance of parametric sensitivity has already been shown for determining vital properties of biological systems such as robustness and also in experimental design where the sensitivity gives information about the identifiability of individual rate constants.
+
+The sensitivity of parameters is also of central importance when inferring unknown parameter values for a mathematical model
+
+Performing exact inference over stochastic kinetic models described by Markov Jump Processes is extremely difficult.  First and foremost, the likelihood is usually analytically intractable for models with levels of complexity suitable for describing natural phenomena.
+
+Approximations of the likelihood surface, such as LNA and moment closure.  Parameter inference - want to explore the likelihood surface - can consider it as a Riemannian manifold.  This manifold is an approximation of the true underlying Riemannian manifold of the analytically intractable likelihood.
+
+non-linear likelihood, computational expensive, proposals expensive, analytically intractable likelihood
+
 
 \section{Methods}
 
-\subsection{Stochastic kinetic models}
+\subsection{Stochastic Population Models}
 
-\subsection{Moment closure scheme}
+\subsection{Moment Closure Scheme}
 
 \subsection{Approximate Riemannian Geometry}
 
-\subsection{Delay acceptance scheme}
+\subsection{Delay Acceptance Scheme}
 
 Key point: little overhead for approximate likelihood
 
