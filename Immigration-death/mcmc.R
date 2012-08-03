@@ -22,11 +22,11 @@ log_likelihood = function(k1, k2, t, x) {
     return(ll)
 }
 
-dd = read.csv("data/immigration_death1.csv")
+dd = read.csv("data/immigration_death_k1_1_k2_1.csv")
 log_likelihood(1, 0.1, dd[,1], dd[,2])
 
-k1 = seq(log(0.001),log(10),  length.out=100)
-k2 = seq(log(0.001),log(10), length.out=100)
+k1 = seq(log10(1.1),log10(100),  length.out=500)
+k2 = seq(log10(1.1),log10(100), length.out=500)
 d = outer(k1, k2, function(k1, k2) log_likelihood(k1, k2, dd[,1], dd[,2]))
-image(log(k1), log(k2), exp(d))
+image(log10(k1), log10(k2), exp(d))
 points(1, 1,pch=18)
