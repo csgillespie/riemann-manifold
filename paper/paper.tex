@@ -51,36 +51,7 @@
 %  pub the summary here
 
 \begin{abstract}
-\begin{itemize}
-\item We present efficient and novel methodology for Bayesian inference over stochastic kinetic models with complex dynamics and large numbers of parameters.
-
-Inference for MJP is difficult: non-linear likelihood, computational
-  expensive, proposals expensive, analytically intractable likelihood
-\item Data: Partially observed discrete, noisy time-course.
-\item Existing work for likelihood evaluations: 
-\begin{itemize}
-\item Likelihood calculations
-\begin{itemize}
-\item Exact: Boys et al, slow, not noise
-\item Approx SDE - Andy and Darren (with Noise)
-\item Approx MC - Andy and Colin (no noise)
-\item Approx LNA - Mark (no noise), Kolmo' (no noise, but check)
-\end{itemize}
-\item New:
-\begin{itemize}
-\item Approximate proposal mechanism based on the geometry of MC
-\begin{itemize}
-\item Overcome strong correlation structure which is standard with partially
-  observed data
-\item Fast proposals based on approximate geometry
-\item Accept/reject with approximate model before trying exact model
-\end{itemize}
-\item Inference is exact
-\item Including observational error
-\item Time course measurements, unlike Mark's LNA
-\end{itemize}
-\end{itemize}
-\end{itemize}
+Abstract
 \end{abstract}
 
 %
@@ -95,8 +66,17 @@ Stochastic; Moment-closure.
 
 \maketitle
 
+\section{Useful Papers}
+
+\begin{itemize}
+\item Papers cited in \textbf{refs.bib}
+\item Useful papers put in papers directory
+\end{itemize}
+
+
+
 \section{Introduction}
-\label{s:intro}
+\label{s:intro}\textbf{31/8: BC/CSG}
 
 \begin{itemize}
 \item Inference for MJP is difficult: non-linear likelihood, computational
@@ -134,6 +114,7 @@ Approximations of the likelihood surface, such as LNA and moment closure.  Param
 non-linear likelihood, computational expensive, proposals expensive, analytically intractable likelihood
 
 
+
 \section{Methods}
 
 \subsection{Stochastic Population Models}
@@ -157,34 +138,66 @@ Key point: little overhead for approximate likelihood
 
 \subsection{Immigration-death}
 
-\begin{itemize}
-\item Comparison between Riemannian MC proposal, LNA proposal and true proposal
-\item Comparison between Riemannian and MH
-\item A single example, with highly correlated parameters
-\end{itemize}
 
+  \begin{itemize}
+  \item Calculate exact proposal for comparison (\textbf{17/8: CSG})
+  \item Construct LNA model for ID (\textbf{14/9: CSG/BC})
+  \item Graphs:
+    \begin{itemize}
+    \item Data: \textbf{17/8: CSG}
+    \item Geometry proposal: 3 proposals for the 3 derviates: k1\^2, k1k2, k2\^2
+      \textbf{24/8: }
+    \item Likelihood: Exact likelihood vs LNA vs MC \textbf{24/8: }
+    \item Delay acceptance(?)
+    \item Sampling efficiences M-H vs RM (appendix)
+    \end{itemize}
+  \end{itemize} 
+  
 \subsection{SIR (type) model}
 
-\begin{itemize}
-\item Use model from Stumpf ABC paper (with real data?)
-\end{itemize}
+
+    \begin{itemize}
+    \item Construct moment equations (\textbf{17/8: CSG}) Lognormal?
+    \item Construct proposal
+    \item Delay acceptance
+    \item Run experiments
+    \item Graphs:
+      \begin{itemize}
+      \item Data
+      \item Sampling efficiences M-H vs RM (appendix)
+      \item Posterior compare to Stumpf
+      \end{itemize}
+    \end{itemize}
 
 \subsection{Aphid data set}
 
-\begin{itemize}
-\item 36 parameters - 18 birth, 18 death. 3 water treatments, 3 nitrogen treatments and 3 blocks, with interactions
-\item 5*27 (I think) latent data sets
-\item Exploit Sub-mannifolds for choosing parameter sets
-\item Poisson error structure
-\end{itemize}
+\subsubsection{Introduction}
+
+36 parameters - 18 birth, 18 death. 3 water treatments, 3 nitrogen treatments
+and 3 blocks, with interactions. 5*27 (I think) latent data sets. Exploit Sub-mannifolds for choosing parameter sets
+Poisson error structure. 
 
 
+    \begin{itemize}
+    \item Construct moment equations (appendix) \textbf{Done}
+    \item Construct proposal (appendix)
+    \item Delay acceptance
+    \item Run experiments
+    \item Graphs:
+      \begin{itemize}
+      \item Data \textbf{Done}
+      \item Sampling efficiences M-H vs RM; ESS
+      \item Posteriors
+      \end{itemize}
+    \end{itemize}
+    
 \section{Discussion}
 
 \begin{itemize}
 \item Use of geometry vital in tackling real problems
 \item Could also use other approximation schemes such as the LNA??
 \end{itemize}
+
 
 \backmatter
 
