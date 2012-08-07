@@ -122,7 +122,7 @@ of the National Academy of Sciences of the United States of America}
 %% Javier de Ruiz Garcia\affil{2}{Universidad de Murcia, Bioquimica y Biologia
 %% Molecular, Murcia, Spain}, \and Franklin Sonnery\affil{2}{}}
 
-\author{B. Calderhead\affil{1}{UCL}, C. S. Gillespie\affil{2}{NCL}}
+\author{Ben Calderhead\affil{1}{University College London, London, United Kingdom}, Colin S. Gillespie\affil{2}{Newcastle University, Newcastle upon Tyne, United Kingom}}
 % \email{b.calderhead@ucl.ac.uk}
 % \email{colin.gillespie@newcastle.ac.uk}
 % \\
@@ -143,7 +143,7 @@ of the United States of America}
 
 
 %% When adding keywords, separate each term with a straight line: |
-\keywords{term | term | term}
+\keywords{moment closure | stochastic | inference}
 
 %% Optional for entering abbreviations, separate the abbreviation from
 %% its definition with a comma, separate each pair with a semicolon:
@@ -309,7 +309,41 @@ Poisson error structure.
 %% Optional Appendix or Appendices
 %% \appendix Appendix text...
 %% or, for appendix with title, use square brackets:
-%% \appendix[Appendix Title]
+
+%Taken from the tex file in the docs folder
+%Not edited yet
+\appendix[Immigration-death process]
+
+
+This model has a single species, $N(t)$. The first reaction represents a constant immigration rate, and occurs with rate $k_1$. The second reaction represents death in the $N$ population and occurs with rate $k_2 N(t)$. The model can be represented by the coupled (pseudo) reactions, 
+\begin{equation}\label{1}
+R_1: \emptyset  \xrightarrow{\phantom{a}k_1\phantom{a}} N 
+\quad \text{and} \quad
+R_2: N  \xrightarrow{\phantom{a}k_2\phantom{a}} \emptyset.
+\end{equation}
+The forward Kolmogorov equation (or CME) for this model is
+\[
+dp_{n}(t)/dt = k_1 p_{n-1}(t) +  k_2 (n+1) p_{n+1}(t) 
+- (k_1 + k_2 n) p_{n}(t) \;.
+\]
+This equation can be solved exactly using a generating function approach.
+
+\subsection{Moments}
+
+The general idea of \textit{moment closure} is to represent the analytically intractable moments of the process as a set of ODEs. The solutions of these ODEs provide approximations for the moments. With this particular system, we can solve the ODEs analytically - so the moments are exact.
+
+The marginal means of the process are:
+\[
+E[n(t) | n(0) = n_0 ] = \frac{k_1}{k_2}(1-e^{-k_2 t}) + n_0 e^{-k_2 t} \;.
+\]
+Notice that as $t \rightarrow \infty$,
+\[
+E[n(t) | n(0) = n_0 ] = \frac{k_1}{k_2} \;.
+\]
+The marginal variance is
+\[
+Var[n(t) | n_0]  = \left(\frac{k_1}{k_2} + n_0e^{-k_2 t}\right)(1-e^{-k_2 t}) \;.
+\]
 
 \begin{acknowledgments}
 Thanks to AG and Ohio state University
