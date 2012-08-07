@@ -345,6 +345,32 @@ The marginal variance is
 Var[n(t) | n_0]  = \left(\frac{k_1}{k_2} + n_0e^{-k_2 t}\right)(1-e^{-k_2 t}) \;.
 \]
 
+
+%Just copied from the RSS paper
+\appendix[Aphid model]
+
+
+Following \cite{Matis06}, we assume a linear aphid population birth rate of $\lambda N(t)$ where $N(t)$ denotes the size of the aphid population at time $t$. As discussed in \cite{Prajneshu98}, aphids excrete honey-dew, forming a cover on the leaf surface and causing aphid starvation. As the area covered by excretion at time $t$ is proportional to the cumulative population size at time $t$, $C(t)$, we assume a death rate of $\mu N(t)C(t)$ and for simplicity, assume that there is no removal or decomposition of honey-dew \cite{Matis06,Matis07a,Matis08}. The model can be represented by the coupled (pseudo) reactions, 
+\begin{align}
+N & \xrightarrow{\phantom{a}\lambda\phantom{a}} 2N + C \label{2.1} \\
+N+C & \xrightarrow{\phantom{a}\mu\phantom{a}} C \label{2.2}
+\end{align}
+since clearly, an occurrence of (\ref{2.1}) will lead to a unit increase in both $N$ and $C$ whereas the reaction in  (\ref{2.2}) will give a unit decrease in $N$ but leave $C$ unchanged. Such models are known in the literature as stochastic kinetic models; see \cite{Wilkinson06} for a concise introduction. We can express the probabilistic laws governing the time evolution of the process by considering a small interval $(t,t+dt]$, namely
+\begin{align}
+\Pr\left\{N(t+dt)=n(t)+1,\,C(t+dt)=c(t)+1\,|\,n(t),c(t)\right\}&=\lambda n(t)dt+o(dt) \label{2.3} \\
+\Pr\left\{N(t+dt)=n(t)-1,\,C(t+dt)=c(t)\,|\,n(t),c(t)\right\}&=\mu n(t)c(t)dt+o(dt),\label{2.4}
+\end{align}
+and we adopt the convention that upper case denotes random variable and lower case denotes the realisation. The expressions in (\ref{2.3}) and (\ref{2.4}) describe a Markov jump process where each event occurs at a particular rate dependent on the current state of the system. Note that ignoring stochasticity leads to a deterministic model where the time course behaviour of $N(t)$ and $C(t)$ is described by the set of differential equations,
+\[
+\left\{\begin{array}{l}
+\displaystyle\frac{dN(t)}{dt}=\lambda N(t)-\mu N(t)C(t)\\
+\\
+\displaystyle\frac{dC(t)}{dt}= \lambda N(t)
+\end{array}\right.
+\] 
+
+
+
 \begin{acknowledgments}
 Thanks to AG and Ohio state University
 \end{acknowledgments}
