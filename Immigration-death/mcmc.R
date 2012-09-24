@@ -29,4 +29,6 @@ k1 = seq(log10(1.1),log10(100),  length.out=500)
 k2 = seq(log10(1.1),log10(100), length.out=500)
 d = outer(k1, k2, function(k1, k2) log_likelihood(k1, k2, dd[,1], dd[,2]))
 image(log10(k1), log10(k2), exp(d))
+
+
 points(1, 1,pch=18)
