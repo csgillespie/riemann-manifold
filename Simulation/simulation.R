@@ -50,7 +50,7 @@ gillespie = function(IC, pars, maxtime=10) {
 set.seed(1)
 dd = gillespie(c(0, 0), c(1, 1), 50)
 dd_dis = discretise(dd, 5)
-
+write.csv(dd, file="data/full_immigration_death.csv", row.names=FALSE)
 ##Plot the data
 par(mfrow=c(1,2))
 plot(dd$times, dd$n, type='s')

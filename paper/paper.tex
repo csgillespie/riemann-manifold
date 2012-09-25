@@ -40,7 +40,7 @@
 % [dviwindo], [emtex], [dviwin], [pctexps], [pctexwin], [pctexhp], [pctex32],
 % [truetex], [tcidvi], [vtex], [oztex], [textures], [xetex]
 
-%\usepackage[dvips]{graphicx}
+\usepackage{graphicx}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% OPTIONAL POSTSCRIPT FONT FILES
@@ -234,7 +234,6 @@ Key point: little overhead for approximate likelihood
 \section{Example}
 
 \subsection{Immigration-death}
-
 
   \begin{itemize}
   \item Calculate exact proposal for comparison (\textbf{17/8: CSG})
@@ -443,6 +442,28 @@ Thanks to AG and Ohio state University
 %% table text
 %% \end{tabular}
 %% \end{table*}
+
+\begin{figure}[ht]
+\begin{center}
+\centerline{\includegraphics[]{../graphics/figure1}}
+\end{center}
+\caption{Stochastic simulation of the immigration-death process, with parameters
+$k_1=k_2=1$ and $n(0)=0$. The black line shows the full stochastic realisation, 
+the red dots indiciate the observed data.}\label{F1}
+\end{figure}
+\begin{figure*}[ht]
+\begin{center}
+\centerline{\includegraphics[width=.7\textwidth]{../graphics/figure2}}
+\caption{Comparison of the exact and the moment closure expected fisher information matrix. }
+\label{F2}
+\end{center}
+\end{figure*}
+% 
+% \begin{figure*}
+% \centering
+% \includegraphics[]{../graphics/figure1}
+% \caption{blah}
+% \end{figure*}
 
 \end{document}
 
