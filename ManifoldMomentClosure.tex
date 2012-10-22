@@ -1,0 +1,87 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{algorithm,algorithmic}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Manifold Sampling for Moment Closure}
+\author{BC}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\section{Expected Fisher Information for Moment Closure}
+
+We start by considering the likelihood induced by the moment closure approach using a Gaussian approximation.  Following from Equation 7 in the Stats and Computing paper, the pseudo-likelihood follows as
+
+\begin{eqnarray}
+\hat{L}( \boldsymbol\theta | {\bf Z} ) &=& \prod_{i=1}^{T-1} \hat{p}( {\bf Z}(t_{i+1}) | {\bf Z}(t_i) ) \notag \\
+&=& \prod_{i=1}^{T-1} {N}_{ {\bf Z}(t_{i+1}) } \left( \varphi_i, \boldsymbol\Sigma_{i} \right)
+\end{eqnarray}
+
+\noindent where
+
+\begin{eqnarray}
+\varphi_i &=& \hat{\text{E}}( {\bf Z}(t_{i+1}) | {\bf Z}(t_i) ) \\
+\boldsymbol\Sigma_i &=& \hat{\text{Var}} ( {\bf Z}(t_{i+1}) | {\bf Z}(t_i) )
+\end{eqnarray}
+
+\noindent such that $\varphi_i$ and $\boldsymbol\Sigma_i$ are the mean and covariance, respectively, under the moment closure approximation.  We now need to calculate the metric tensor for this pseudo-likelihood, which is given by the Expected Fisher Information.  Using the Gaussian approximation above, the Expected Fisher Information is easy to calculate and takes a standard form; due to the Markov property it turns out to be the sum of Expected Fisher Informations for each ${\bf Z}_{t_i}$.  For ease of notation, let us denote $\hat{L}_i = \hat{p}( {\bf Z}(t_{i+1}) | {\bf Z}(t_i) )$.  The overall Expected Fisher Information follows as
+
+\begin{eqnarray}
+\text{FI}_{\hat{L}} &=& \text{E}_{\hat{L}} \left( \frac{\partial \log \hat{L}}{\partial\boldsymbol\theta}^T \frac{\partial \log \hat{L}}{\partial\boldsymbol\theta} \right) \notag\\
+&=& \sum_{i=1}^{T-1} \text{E}_{\hat{L}_i} \left( \frac{\partial \log \hat{L}_i}{\partial\boldsymbol\theta}^T \frac{\partial \log \hat{L}_i}{\partial\boldsymbol\theta} \right)\\
+&=& \sum_{i=1}^{T-1} \text{FI}_{\hat{L}_i}
+\end{eqnarray}
+
+\noindent The $\hat{L}_i$s are all Gaussian, and so the standard expressions for the Expected Fisher Information of multivariate Gaussians may be used for each component of the sum.  In particular, the $(m,n)$th component of the $i$th FI is given by
+
+\begin{eqnarray}
+\text{FI}_{\hat{L}_i (m,n)} = \frac{\partial \varphi_i}{\partial \theta_m}^T \boldsymbol\Sigma_i^{-1} \frac{\partial \varphi_i}{\partial \theta_n} + \frac{1}{2}\text{tr}\left( \boldsymbol\Sigma_i^{-1} \frac{\partial \boldsymbol\Sigma_i}{\partial \theta_m} \boldsymbol\Sigma_i^{-1} \frac{\partial \boldsymbol\Sigma_i}{\partial \theta_n} \right)
+\end{eqnarray}
+
+
+\section{Simplified mMALA Sampler}
+
+We may construct a simple Metropolis-Hastings proposal mechanism that makes use of the local geometry around each point in the parameter space.  We note that we are working with the log-likelihood and its associated geometry here.  In particular, our proposal will have a mean based on the current parameters plus a small move in the direction of the natural gradient, and a covariance equal to the scaled inverse of the Expected Fisher Information at the current point.
+
+The natural gradient is defined as the inverse of the Expected Fisher Information (the metric tensor) multiplied by the standard gradient of the log-likelihood.  The mean of the proposal at $\boldsymbol\theta$ is therefore given by,
+
+\begin{eqnarray}
+\boldsymbol\mu(\boldsymbol\theta) = \boldsymbol\theta + \frac{\epsilon^2}{2} \text{FI}_{\hat{L}}^{-1}(\boldsymbol\theta)  \frac{\partial \hat{L}(\boldsymbol\theta)}{\partial \boldsymbol\theta}
+\end{eqnarray}
+
+\noindent and the covariance of the proposal is given by,
+
+\begin{eqnarray}
+\boldsymbol\Sigma(\boldsymbol\theta) = \epsilon^2 \text{FI}_{\hat{L}}^{-1}(\boldsymbol\theta)
+\end{eqnarray}
+
+
+The metric tensor, in this case given by the Expected Fisher Information, is usually represented by $G$, and the log-likelihood by $L$.  Using this notation, the general simplified mMALA algorithm is given in full in Algorithm 1.
+
+\begin{algorithm}[h]                      % enter the algorithm environment
+\caption{Simplified Manifold MALA}          % give the algorithm a caption
+\label{alg:SmMALARecipe}                           % and a label for \ref{} commands later in the document
+\begin{algorithmic}[1]                   % enter the algorithmic environment
+\STATE Initialise current $\boldsymbol\theta$
+\FOR{IterationNum $= 1$ to NumSamples}
+\STATE Sample $\boldsymbol\theta^{\textsf{new}} \sim p(\boldsymbol\theta^{\textsf{new}}|\boldsymbol\theta) = N(\mu(\boldsymbol\theta, \epsilon), \Sigma(\boldsymbol\theta, \epsilon))$, \\where $\mu(\boldsymbol\theta, \epsilon) = \boldsymbol\theta + \frac{\epsilon^2}{2} {G}^{-1}(\boldsymbol\theta) \nabla_{\boldsymbol\theta} {L}(\boldsymbol\theta)$ and $\Sigma(\boldsymbol\theta, \epsilon) = \epsilon^2 G^{-1}(\boldsymbol\theta)$
+\STATE Calculate current log-likelihood ${L}(\boldsymbol\theta)$ and proposed log-likelihood ${L}(\boldsymbol\theta^{\textsf{new}})$
+\STATE Calculate $\log(p(\boldsymbol\theta^{\textsf{new}}|\boldsymbol\theta))$, $\log(p(\boldsymbol\theta|\boldsymbol\theta^{\textsf{new}}))$, $\log($Prior$(\boldsymbol\theta))$, $\log($Prior$(\boldsymbol\theta^{\textsf{new}}))$
+\STATE LogRatio $= {L}(\boldsymbol\theta^{\textsf{new}}) + \log($Prior$(\boldsymbol\theta^{\textsf{new}})) + \log(p(\boldsymbol\theta|\boldsymbol\theta^{\textsf{new}})) - {L}(\boldsymbol\theta) - \log($Prior$(\boldsymbol\theta)) - \log(p(\boldsymbol\theta^{\textsf{new}}|\boldsymbol\theta))$
+\IF{LogRatio $> 0$ \OR LogRatio $> \log$(rand)}
+\STATE Set $\boldsymbol\theta = \boldsymbol\theta^{\textsf{new}}$
+\ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+
+\end{document}  
