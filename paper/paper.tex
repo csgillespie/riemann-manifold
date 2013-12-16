@@ -122,7 +122,9 @@ of the National Academy of Sciences of the United States of America}
 %% Javier de Ruiz Garcia\affil{2}{Universidad de Murcia, Bioquimica y Biologia
 %% Molecular, Murcia, Spain}, \and Franklin Sonnery\affil{2}{}}
 
-\author{Ben Calderhead\affil{1}{University College London, London, United Kingdom}, Colin S. Gillespie\affil{2}{Newcastle University, Newcastle upon Tyne, United Kingom}}
+\author{Ben Calderhead\affil{1}{University College London, London, United
+    Kingdom}, Colin S. Gillespie\affil{2}{Newcastle University, Newcastle upon
+    Tyne, United Kingdom}}
 % \email{b.calderhead@ucl.ac.uk}
 % \email{colin.gillespie@newcastle.ac.uk}
 % \\
@@ -139,7 +141,28 @@ of the United States of America}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{article}
 
-\begin{abstract} -- enter abstract text here -- \end{abstract}
+\begin{abstract}
+We introduce an efficient and novel approach for Bayesian statistical
+inference of stochastic population models with complex dynamics,
+unobserved species and large numbers of parameters. Despite their
+increasing ubiquity, Bayesian analysis of such stochastic models still
+presents major challenges, as the exact likelihood is often computa-
+tionally intractable for realistically sized models and full exploration
+of the parameter space may be inhibited by very strong correla-
+tion structure. Our methodology exploits the natural underlying ap-
+proximate Riemannian geometry of the model parameters induced
+by estimating the likelihood using moment closure techniques. We
+demonstrate how this geometric approach allows us to perform in-
+ference in a statistically and computationally efficient manner, and
+in doing so we highlight the link between the Riemannian structure
+of the parameters and sensitivity analysis of the dynamical system.
+We illustrate the performance of our approach using synthetic ex-
+amples, as well as a realistically-sized partially observed ecological
+model with 50 unknown parameters, with data describing the evolu-
+tion of aphid populations. For the examples in this paper, efficient
+computer code written in Matlab and C is available from the authors
+upon request.
+\end{abstract}
 
 
 %% When adding keywords, separate each term with a straight line: |
@@ -172,6 +195,76 @@ of the United States of America}
 
 
 
+The use of stochastic models is rapidly becoming ubiquitous in many areas of the
+natural sciences, where it is necessary to model the intrinsic stochasticity of
+a dynamical system in or- der to fully characterise its main modes of behaviour
+[REFs]. Markov Jump Process models - what are they and why are they useful?
+
+Mathematical approaches are essential for making sense of these complex models;
+well developed for deterministic mod- els, such as ordinary differential
+equations, but still underde- veloped for stochastic models.
+
+Why? Likelihood is often computationally intractable for
+all but the simplest of Markov Jump Process models.
+Sensitivity analysis plays an important role in elucidating
+the behaviour of mathematical models with complex dynam
+ics - how do variations in parameters accpet the output? Only
+fairly recently have methods been published for estimating the
+local sensitivity information for a stochastic chemical kinetic
+model via use of the linear noise approximation [REFs].
+local versus global sensitivity analysis
+
+Sensitivity information at the maximum likelihood is
+based on a linearisation around this point and is thus a lo-
+cal measure. Given the strong nonlinearities present in many
+current models, this provides limited information about the
+dynamics of the system.
+
+FIM is often used to describe the local sensitivity at the
+maximum likelihood however this makes strong assumption
+of normality around that set of parameters, which may be
+inappropriate for strongly nonlinear systems.
+
+Bayesian methodology in particular offers a consistent,
+probabilistic framework for reasoning under uncertainty,
+which may occur both in the data and the model structure
+itself.
+
+Posterior distribution as a global measure of sensitivity of
+the system. However drawing samples from this is generally
+very challenging.
+
+FIM provides a link between local and global sensitivity
+analysis.
+
+FIM is usually used to measure the reliability of inferences
+around the maximum likelihood and is often understood ge-
+ometrically as the curvature of the log-likelihood around this
+point. However, the expected Fisher Information in fact gives
+us much more geometric information than this; it defines a
+metric tensor at any point of parameter space and thus pro-
+vides a natural representation of the parameter space as a
+Riemannian manifold, where distances between two sets of
+parameters are defined in terms of the relative changes they
+induce on the likelihood.
+
+We use a moment closure technique to obtain local ap-
+proximations to the likelihood at the current point - such an
+approach extends the LNR as we may now choose the pdf
+with which to approximate the local likelihood. We demon-
+strate how the expected Fisher Information may be obtained
+from this moment closure approximation and that this forms
+a Riemannian manifold that approximates the local sensitiv-
+ity of the model at each possible set of parameters. Further,
+we demonstrate the utility of this using differential geometric
+MCMC algorithms that allow us to sample from the poste-
+rior distribution of the parameters of stochastic population
+models, by utilising the local sensitivity information at each
+point. Essentially a locally adaptive algorithm that exploits
+the local sensitivity at each point, allowing us to move from
+local to global sensitivity information in a computationally
+and statistically efficient manner.
+
 \section{Introduction}
 \label{s:intro}\textbf{31/8: BC/CSG}
 
@@ -199,8 +292,17 @@ Different from Mark's LNA paper:
 \item Time course data
 \item Using real data
 \end{itemize}
+Why MC is better than LNA
+\begin{itemize}
+\item Higher-order approximation - REF: J CHEM Phy
+\item Use other closure distributions: Lognormal - beta-bionomial
+\item REF other recent MC PNAS papers - Kazinesis and Zurich paper
+\end{itemize}
 
-Importance of stochastic population models for further scientific understanding of natural systems vs deterministic models.  For example in ecology, where we often have to deal with discrete noisy data.  Importance of parametric sensitivity has already been shown for determining vital properties of biological systems such as robustness and also in experimental design where the sensitivity gives information about the identifiability of individual rate constants.
+
+
+
+Importance of stochastic population models for further scientific understanding of natural systems vs deterministic models.  For example in ecology, where we often have to deal with discrete noisy data.  Importance of parametric sensitivity has already been shown for determining vital properties of biological systems such as robustness and also in experimental design where the sensitivity gives information about the identifiably of individual rate constants.
 
 The sensitivity of parameters is also of central importance when inferring unknown parameter values for a mathematical model
 
@@ -237,15 +339,12 @@ Key point: little overhead for approximate likelihood
 
   \begin{itemize}
   \item Calculate exact proposal for comparison (\textbf{17/8: CSG})
-  \item Construct LNA model for ID (\textbf{14/9: CSG/BC})
   \item Graphs:
     \begin{itemize}
-    \item Data: \textbf{17/8: CSG}
-    \item Geometry proposal: 3 proposals for the 3 derviates: k1\^2, k1k2, k2\^2
-      \textbf{24/8: }
-    \item Likelihood: Exact likelihood vs LNA vs MC \textbf{24/8: }
-    \item Delay acceptance(?)
-    \item Sampling efficiences M-H vs RM (appendix)
+    \item Data:
+    \item Geometry proposal: 2 proposals for the 3 derivatives: k1\^2, k1k2, k2\^2
+    \item Likelihood: Exact likelihood vs MC
+    \item Sampling efficiencies M-H vs RM (appendix)
     \end{itemize}
   \end{itemize} 
   
@@ -253,15 +352,13 @@ Key point: little overhead for approximate likelihood
 
 
     \begin{itemize}
-    \item Construct moment equations (\textbf{17/8: CSG}) Lognormal?
+    \item Construct moment equations:  Lognormal or Beta Binomial
     \item Construct proposal
-    \item Delay acceptance
     \item Run experiments
     \item Graphs:
       \begin{itemize}
       \item Data
-      \item Sampling efficiences M-H vs RM (appendix)
-      \item Posterior compare to Stumpf
+      \item Sampling efficiencies M-H vs RM (appendix)
       \end{itemize}
     \end{itemize}
 
@@ -270,19 +367,18 @@ Key point: little overhead for approximate likelihood
 \subsubsection{Introduction}
 
 36 parameters - 18 birth, 18 death. 3 water treatments, 3 nitrogen treatments
-and 3 blocks, with interactions. 5*27 (I think) latent data sets. Exploit Sub-mannifolds for choosing parameter sets
+and 3 blocks, with interactions. 5*27 (I think) latent data sets. Exploit Sub-manifolds for choosing parameter sets
 Poisson error structure. 
 
 
     \begin{itemize}
     \item Construct moment equations (appendix) \textbf{Done}
     \item Construct proposal (appendix)
-    \item Delay acceptance
     \item Run experiments
     \item Graphs:
       \begin{itemize}
       \item Data \textbf{Done}
-      \item Sampling efficiences M-H vs RM; ESS
+      \item Sampling efficiencies M-H vs RM; ESS
       \item Posteriors
       \end{itemize}
     \end{itemize}
@@ -291,9 +387,7 @@ Poisson error structure.
 
 \begin{itemize}
 \item Use of geometry vital in tackling real problems
-\item Could also use other approximation schemes such as the LNA??
 \end{itemize}
-
 %% == end of paper:
 
 %% Optional Materials and Methods Section
@@ -449,7 +543,7 @@ Thanks to AG and Ohio state University
 \end{center}
 \caption{Stochastic simulation of the immigration-death process, with parameters
 $k_1=k_2=1$ and $n(0)=0$. The black line shows the full stochastic realisation, 
-the red dots indiciate the observed data.}\label{F1}
+the red dots indicate the observed data.}\label{F1}
 \end{figure}
 \begin{figure*}[ht]
 \begin{center}
