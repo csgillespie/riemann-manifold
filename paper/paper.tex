@@ -265,7 +265,7 @@ the local sensitivity at each point, allowing us to move from
 local to global sensitivity information in a computationally
 and statistically efficient manner.
 
-\section{Introduction}
+\section{Introduction (1 page)}
 \label{s:intro}\textbf{31/8: BC/CSG}
 
 \begin{itemize}
@@ -288,7 +288,6 @@ Different from Mark's LNA paper:
 \begin{itemize}
 \item Analysis of impact of the approximate proposal scheme
 \item Using Noise
-\item Using delayed acceptance scheme so exact inference
 \item Time course data
 \item Using real data
 \end{itemize}
@@ -302,38 +301,50 @@ Why MC is better than LNA
 
 
 
-Importance of stochastic population models for further scientific understanding of natural systems vs deterministic models.  For example in ecology, where we often have to deal with discrete noisy data.  Importance of parametric sensitivity has already been shown for determining vital properties of biological systems such as robustness and also in experimental design where the sensitivity gives information about the identifiably of individual rate constants.
+Importance of stochastic population models for further scientific understanding
+of natural systems vs deterministic models. For example in ecology, where we
+often have to deal with discrete noisy data. Importance of parametric
+sensitivity has already been shown for determining vital properties of
+biological systems such as robustness and also in experimental design where the
+sensitivity gives information about the identifiably of individual rate
+constants.
 
-The sensitivity of parameters is also of central importance when inferring unknown parameter values for a mathematical model
+The sensitivity of parameters is also of central importance when inferring
+unknown parameter values for a mathematical model
 
-Performing exact inference over stochastic kinetic models described by Markov Jump Processes is extremely difficult.  First and foremost, the likelihood is usually analytically intractable for models with levels of complexity suitable for describing natural phenomena.
+Performing exact inference over stochastic kinetic models described by Markov
+Jump Processes is extremely difficult. First and foremost, the likelihood is
+usually analytically intractable for models with levels of complexity suitable
+for describing natural phenomena.
 
-Approximations of the likelihood surface, such as LNA and moment closure.  Parameter inference - want to explore the likelihood surface - can consider it as a Riemannian manifold.  This manifold is an approximation of the true underlying Riemannian manifold of the analytically intractable likelihood.
+Approximations of the likelihood surface, such as LNA and moment closure.
+Parameter inference - want to explore the likelihood surface - can consider it
+as a Riemannian manifold. This manifold is an approximation of the true
+underlying Riemannian manifold of the analytically intractable likelihood.
 
-non-linear likelihood, computational expensive, proposals expensive, analytically intractable likelihood
+non-linear likelihood, computational expensive, proposals expensive,
+analytically intractable likelihood
 
 
 
-\section{Methods}
+\section{Methods (total 3 * 0.5 pages)}
 
 \subsection{Stochastic Population Models}
 
-C \& B
+C \& B (27/2/14) 
 
 \subsection{Moment Closure Scheme}
 
-CSG
+CSG (27/1/14)
 
 \subsection{Approximate Riemannian Geometry}
-BC
 
-\subsection{Delay Acceptance Scheme}
-
-?
-Key point: little overhead for approximate likelihood
+BC (27/1/14)
 
 
-\section{Example}
+
+
+\section{Example (3 pages incl pics)}
 
 \subsection{Immigration-death}
 
@@ -367,15 +378,15 @@ Key point: little overhead for approximate likelihood
 \subsubsection{Introduction}
 
 36 parameters - 18 birth, 18 death. 3 water treatments, 3 nitrogen treatments
-and 3 blocks, with interactions. 5*27 (I think) latent data sets. Exploit Sub-manifolds for choosing parameter sets
-Poisson error structure. 
+and 3 blocks, with interactions. 5*27 (I think) latent data sets. Exploit
+Sub-manifolds for choosing parameter sets Poisson error structure.
 
 
-    \begin{itemize}
-    \item Construct moment equations (appendix) \textbf{Done}
-    \item Construct proposal (appendix)
-    \item Run experiments
-    \item Graphs:
+\begin{itemize}
+\item Construct moment equations (appendix) \textbf{Done}
+\item Construct proposal (appendix)
+\item Run experiments
+\item Graphs:
       \begin{itemize}
       \item Data \textbf{Done}
       \item Sampling efficiencies M-H vs RM; ESS
@@ -387,6 +398,8 @@ Poisson error structure.
 
 \begin{itemize}
 \item Use of geometry vital in tackling real problems
+\item Not limited to Guassian distribution
+\item Higher (and hence better) approximation
 \end{itemize}
 %% == end of paper:
 
@@ -405,6 +418,7 @@ Poisson error structure.
 
 %Taken from the tex file in the docs folder
 %Not edited yet
+
 \appendix[Immigration-death process]
 
 
